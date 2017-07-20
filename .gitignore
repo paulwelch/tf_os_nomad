@@ -1,0 +1,15 @@
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Potentially sensitive information in vars
+*.tfvars
+
+# Module directory
+.terraform/
+
+# Temp files
+*.backup
+*.tmp
+*.DS_Store
