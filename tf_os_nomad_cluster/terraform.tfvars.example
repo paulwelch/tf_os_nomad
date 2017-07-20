@@ -1,0 +1,16 @@
+os_auth_url  = "https://my.metacloud.net:5000/v3"
+public_key_file  = "~/.ssh/id_rsa.pub"
+private_key_file = "~/.ssh/id_rsa"
+nomad_bin_url = "https://releases.hashicorp.com/nomad/0.5.6/nomad_0.5.6_linux_amd64.zip"
+do_bootstrap = "1"
+// TODO: get Consul IP's from remote state of a TF Consul project
+consul_join_params = "-retry-join=10.10.10.10 -retry-join=10.10.10.11 -retry-join=10.10.10.12"
+cluster_size = "3"
+region  = "public"
+image_name  = "Container-Linux"
+flavor_name  = "m1.medium"
+ssh_key_pair_name  = "my-key"
+security_group_ids  = [ "12312312-1231-1231-1231-123123123123" ]
+network_id  = "12312312-1231-1231-1231-123123123123123"
+consul_version = "0.8.5"
+env_name_prefix  = "dev"
