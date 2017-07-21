@@ -1,0 +1,1 @@
+export NOMAD_ADDR=http://192.168.100.182:4646

@@ -24,14 +24,14 @@ advertise {
 consul {
   #do this after interpolation issue is fixed
   #address = "$ $ {host_addr}:8500"
-  address = "$COREOS_PRIVATE_IPV4"
+  address = "$COREOS_PRIVATE_IPV4:8500"
 }
 
 client {
     enabled = true
     # A list of Nomad servers to connect to. You only need one running server for this to work
     # Keep port 4647, but replace with the IP of the Nomad server
-    #servers = ["127.0.0.1:4647"]
+    servers = [$${nomad_servers}]
 
     # Use this option at your own discretion. Setting docker.cleanup.image to false means Nomad won't remove
     # images that tasks have used when they are stopped. This is good for when your images won't change and
@@ -45,5 +45,6 @@ EOF
   vars {
     // switch to this method once interpolation works or local vars feature is available
     //host_addr = "${ element(openstack_networking_port_v2.ips.*.all_fixed_ips[0], count.index) }"
+    nomad_servers = "${ var.nomad_servers }"
   }
 }

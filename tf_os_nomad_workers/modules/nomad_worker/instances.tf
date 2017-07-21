@@ -45,12 +45,15 @@ resource "openstack_compute_instance_v2" "nomad_cluster" {
   provisioner "remote-exec" {
     inline = [
       "sudo mkdir /etc/nomad",
-      "sudo mv /tmp/worker.conf /etc/nomad/",
+  //    "sudo mv /tmp/worker.conf /etc/nomad/",
+      "sudo bash -c 'cat /tmp/worker.conf | sed s/\\$$COREOS_PRIVATE_IPV4/$(echo $COREOS_PRIVATE_IPV4)/g > /etc/nomad/worker.conf'",
+      "sudo rm /tmp/worker.conf",
       "sudo chown -R root /etc/nomad",
       "curl -s ${var.nomad_bin_url} > /tmp/nomad.zip",
       "sudo mkdir -p /var/lib/nomad/data",
       "sudo mkdir -p /opt/bin",
       "sudo unzip /tmp/nomad.zip -d /opt/bin/",
+      "sudo rm /tmp/nomad.zip",
       "sudo systemctl start nomad"
     ]
   }

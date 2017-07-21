@@ -38,6 +38,15 @@ Parameters and values to control how the node forms a cluster.  For example, "-r
 EOF
 }
 
+variable "nomad_servers" {
+  type = "string"
+
+  description = <<EOF
+Comma separated list of nomad servers for worker config.  For example,
+"10.10.10.10:4647", "10.10.10.11:4647", "10.10.10.12:4647"
+EOF
+}
+
 variable "worker_count" {
   type = "string"
 
