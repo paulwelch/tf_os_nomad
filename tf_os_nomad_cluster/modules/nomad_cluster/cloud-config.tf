@@ -55,6 +55,24 @@ coreos:
         [Install]
         WantedBy=multi-user.target
 
+    - name: nomad-ui.service
+      command: start
+      content: |
+        [Unit]
+        Description=nomad-ui
+        Wants=network-online.target consul.service nomad.service
+        After=network.target network-online.target consul.service nomad.service
+
+        [Service]
+        Restart=always
+        ExecStartPre=-/usr/bin/docker stop hashi-ui
+        ExecStartPre=-/usr/bin/docker rm -f hashi-ui
+        ExecStart=/usr/bin/docker run -e NOMAD_ENABLE=1 -e NOMAD_ADDR=http://$${host_addr}:4646 -e CONSUL_ENABLE=1 -e CONSUL_ADDR=$${host_addr}:8500 -p 8000:3000 --name hashi-ui jippi/hashi-ui
+        ExecStop=/usr/bin/docker rm -f hashi-ui
+
+        [Install]
+        WantedBy=multi-user.target
+
 EOF
 
   vars {
