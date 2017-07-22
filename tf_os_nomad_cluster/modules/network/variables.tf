@@ -34,7 +34,14 @@ variable "env_name_prefix" {
   type = "string"
 
   description = <<EOF
-Prefix for environment to use on OS names.  This allows you to create
-more than one cluster with unique naming.
+Prefix for environment to use on IP names.
+EOF
+}
+
+variable "app_name" {
+  type = "string"
+
+  description = <<EOF
+App name to use in IP names.  IP Name will follow the pattern [environment]-[app]-[sequence]"
 EOF
 }

@@ -11,6 +11,7 @@ module "nomad_network" {
   security_group_ids = "${ var.security_group_ids }"
   network_id = "${ var.network_id }"
   env_name_prefix = "${ var.env_name_prefix }"
+  app_name = "nomad"
 }
 
 resource "openstack_compute_keypair_v2" "keypair" {

@@ -12,7 +12,7 @@ job "hello_exec" {
 
       config {
         command = "/bin/echo"
-        args    = ["Hello"]
+        args    = ["Hello from $HOSTNAME"]
       }
     }
 

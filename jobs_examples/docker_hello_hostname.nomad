@@ -1,4 +1,4 @@
-job "docs" {
+job "web-hostname" {
   region = "global"
   datacenters = ["dc1"]
 
@@ -8,19 +8,15 @@ job "docs" {
   }
 
   group "example" {
-    count = 3
+    count = 5
 
     task "server" {
       driver = "docker"
 
       service {
-        tags = ["role", "web"]
-        tags = ["driver", "docker"]
+        tags = ["web"]
 
         port = "http"
-        port_map {
-          http = 80
-        }
 
         check {
           type = "http"
@@ -32,11 +28,10 @@ job "docs" {
       }
 
       config {
-        image = "hashicorp/http-echo"
-        args = [
-          "-listen", ":5678",
-          "-text", "hello world",
-        ]
+        image = "stenote/nginx-hostname"
+        port_map {
+          http = 80
+        }
       }
 
       resources {
