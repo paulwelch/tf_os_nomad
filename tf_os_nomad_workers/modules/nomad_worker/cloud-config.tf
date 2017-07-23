@@ -22,7 +22,11 @@ coreos:
         DNS=8.8.4.4
 
     - name: docker.service
-      command: start
+      drop-ins:
+        - name: 01-consul-dns.conf
+          content: |
+            [Service]
+            Environment="DOCKER_OPTS=--dns-search service.consul --dns-search node.consul"
 
     - name: consul.service
       command: start

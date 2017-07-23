@@ -54,6 +54,8 @@ resource "openstack_compute_instance_v2" "nomad_cluster" {
       "sudo mkdir -p /opt/bin",
       "sudo unzip /tmp/nomad.zip -d /opt/bin/",
       "sudo rm /tmp/nomad.zip",
+      "sudo systemctl enable docker",
+      "sudo systemctl start docker",
       "sudo systemctl start nomad"
     ]
   }
