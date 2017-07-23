@@ -18,9 +18,6 @@ job "docs" {
         tags = ["driver", "docker"]
 
         port = "http"
-        port_map {
-          http = 80
-        }
 
         check {
           type = "http"
