@@ -26,7 +26,7 @@ coreos:
         - name: 01-consul-dns.conf
           content: |
             [Service]
-            Environment="DOCKER_OPTS=--dns-search service.consul --dns-search node.consul"
+            Environment="DOCKER_OPTS=--dns $${consul_dns} --dns-search service.consul --dns-search node.consul"
 
     - name: consul.service
       command: start
@@ -67,6 +67,8 @@ EOF
     advertise = "$${COREOS_PRIVATE_IPV4}"
     consul_version = "${ var.consul_version }"
     consul_join_params = "${ var.consul_join_params }"
+    consul_dns = "${ var.consul_dns }"
+    //consul_dns = //TODO: use $host_addr when working
     // switch to this method once interpolation works or local vars feature is available
     //host_addr = "${ element(openstack_networking_port_v2.ips.*.all_fixed_ips[0], count.index) }"
   }

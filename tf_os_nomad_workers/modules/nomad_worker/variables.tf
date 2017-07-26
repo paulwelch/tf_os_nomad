@@ -38,6 +38,14 @@ Parameters and values to control how the node forms a cluster.  For example, "-r
 EOF
 }
 
+variable "consul_dns" {
+  type = "string"
+
+  description = <<EOF
+Valid consul DNS IP address.  TODO: replace with host address
+EOF
+}
+
 variable "nomad_servers" {
   type = "string"
 

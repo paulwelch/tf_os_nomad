@@ -4,6 +4,7 @@ variable "worker_private_key_file" { }
 variable "worker_ssh_key_pair_name" { }
 variable "nomad_bin_url" { }
 variable "consul_join_params" { }
+variable "consul_dns" { }
 variable "nomad_servers" { }
 variable "worker_count" { }
 variable "region" { }
@@ -23,6 +24,7 @@ module "nomad_worker" {
   private_key_file = "${ var.worker_private_key_file }"
   os_auth_url = "${ var.os_auth_url }"
   consul_join_params = "${ var.consul_join_params }"
+  consul_dns = "${ var.consul_dns }"
   nomad_servers = "${ var.nomad_servers }"
   worker_count = "${ var.worker_count }"
   region = "${ var.region }"
