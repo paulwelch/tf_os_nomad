@@ -38,6 +38,7 @@ client {
     # you don't need to pull changes from the docker repo every time.
     options {
       "docker.cleanup.image" = "false"
+      "docker.privileged.enabled" = "true"
     }
 }
 EOF

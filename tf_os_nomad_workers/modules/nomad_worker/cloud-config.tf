@@ -47,11 +47,12 @@ coreos:
         WantedBy=multi-user.target
 
     - name: nomad.service
+      command: start
       content: |
         [Unit]
         Description=nomad
         Wants=network-online.target consul.service
-        After=network.target network-online.target consul.service
+        After=network.target network-online.target consul.service docker.service
 
         [Service]
         Restart=always
