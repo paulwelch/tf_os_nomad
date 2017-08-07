@@ -26,24 +26,20 @@ job "spark" {
 
       config {
         image = "hashicorp/spark-nomad"
-        hostname = "spark-master-svr"
         interactive = true
         tty = true
-        port_map {
-          http = 8080
-          api = 7077
-        }
+        network_mode = "host"
+        privileged = true
         command = "/opt/spark/bin/spark-class"
         args = [
           "org.apache.spark.deploy.master.Master",
-          "--host", "spark-master-svr",
           "--port", "7077",
           "--webui-port", "8080"
         ]
       }
 
       resources {
-        memory = 2048 # MB
+        memory = 4096 # MB
         network {
           mbits = 10
           port "http" {
@@ -72,15 +68,14 @@ job "spark" {
         image = "hashicorp/spark-nomad"
         interactive = true
         tty = true
+        network_mode = "host"
+        privileged = true
         command = "/opt/spark/bin/spark-class"
         args = [
           "org.apache.spark.deploy.worker.Worker",
           "--webui-port", "8081",
-          "spark://spark-master-svr:7077"
+          "spark://spark-master-svr.service.consul:7077"
         ]
-        port_map {
-          http = 8081
-        }
       }
 
       resources {

@@ -2,7 +2,7 @@ job "zeppelin" {
   region = "global"
   datacenters = ["dc1"]
 
-  group "zeppelin" {
+  group "ctl" {
     count = 1
 
     task "svr" {
@@ -21,10 +21,9 @@ job "zeppelin" {
       }
 
       config {
-        image = "apache/zeppelin:0.7.2"
-        port_map {
-          http = 8080
-        }
+        image = "dylanmei/zeppelin:0.7.2"
+        network_mode = "host"
+        privileged = true
       }
 
       resources {
